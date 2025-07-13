@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>admin</title>
+</head>
+<body>
+    <div>
+        <table>
+            <caption>All Content Of C++</caption>
+            <thead><tr>
+                <th>Title</th>
+                <th>Edit</th>
+            </tr></thead>
+            <tbody>
+                <%for(let tit of allData){%>
+                    <tr>
+                        <th><a href="/admin/detail/<%=tit.id%>"><%=tit.title%></a></th>
+                        <th><a href="/admin/edit/<%=tit.id%>">Edit</a></th>
+                        
+                    </tr>
+                    
+                    <%}%>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a href="/admin/add">Add Content</a>
+    </div>
+</body>
+</html>

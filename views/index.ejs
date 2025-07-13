@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>DSA</title>
+</head>
+<body>
+    <div>
+        <h1>All Content</h1>
+        <ol>
+            <%for(let tit of allData){%>
+            <li><a href="/play/<%=tit.id%>"><%=tit.title%></a></li>
+            <%}%>
+        </ol>
+    </div>
+    <footer>
+        <h5>Made With Love by Saroj Kumar</h5>
+    </footer>
+</body>
+</html>
