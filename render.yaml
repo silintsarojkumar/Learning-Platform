@@ -1,1 +1,13 @@
+services:
+  - type: web
+    name: learning-platform
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        value: mongodb+srv://silintsarojkumar:Saroj%402811@cluster0.tiu0bwb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
