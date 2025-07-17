@@ -26,6 +26,6 @@ const userSchema = new mongoose.Schema(
   
 });
 
-const Video = mongoose.model("admin", userSchema); // ⬅️ Create model
+const admin = mongoose.model("admin", userSchema); // ⬅️ Create model
 
 module.exports = admin; // ⬅️ Export the model

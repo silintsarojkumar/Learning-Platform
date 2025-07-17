@@ -3,31 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="admin.css">
+    
     <title>admin</title>
 </head>
 <body>
+   <nav> <h4>Admin:- <%=adminUser.name%></h4> <a href="/admin/logout">Logout</a></nav>
+<section>
+    <div id="admin">
+        <h5>Admin List</h5>
+         <ol>
+            <%for(let admin of adm){%>
+                    <li><a><%=admin.username%></a></li>
+                    <%}%>
+                    <br>
+         </ol>
+        
+        </div>
+   
+
     <div>
+        <h3>Students</h3>
+        <ol>
+            <%for(let user of use){%>
+                    <li><a><%=user.username%></a></li>
+                    <br>
+                    <%}%>
+        </ol>
+        
+                    
+        
+        <div class="link"><a href="/admin/alluser">All Students</a></div>
+    </div>
+
+        <div>
         <table>
-            <caption>All Content Of C++</caption>
+            <caption>All Content</caption>
             <thead><tr>
                 <th>Title</th>
-                <th>Edit</th>
+                
             </tr></thead>
             <tbody>
                 <%for(let tit of allData){%>
                     <tr>
                         <th><a href="/admin/detail/<%=tit.id%>"><%=tit.title%></a></th>
-                        <th><a href="/admin/edit/<%=tit.id%>">Edit</a></th>
+                        
                         
                     </tr>
                     
                     <%}%>
+                    
             </tbody>
         </table>
+
+        <div class="link"><a href="/admin/content">See All</a></div>
+        
     </div>
-    <div>
-        <a href="/admin/add">Add Content</a>
-    </div>
+</section>
+
+
+   
 </body>
 </html>

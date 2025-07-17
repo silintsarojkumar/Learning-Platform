@@ -26,6 +26,6 @@ const userSchema = new mongoose.Schema(
   
 });
 
-const Video = mongoose.model("user", userSchema); // ⬅️ Create model
+const user = mongoose.model("user", userSchema); // ⬅️ Create model
 
 module.exports = user; // ⬅️ Export the model

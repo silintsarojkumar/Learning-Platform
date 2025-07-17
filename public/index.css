@@ -1,0 +1,24 @@
+body{
+    
+    background-image: url(https://repository-images.githubusercontent.com/124365799/7d888300-6a39-11ea-9025-fd5574f062c7);
+    background-size: cover;
+}
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .wrapper {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+
+footer {
+  text-align: center;
+  padding: 5px;
+  background-color: #abbaba;
+  color: #000;
+}

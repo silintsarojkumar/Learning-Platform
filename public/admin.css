@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    background-color: azure;
+}
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    
+  
+
+}
+section div {
+    border: 2px solid black;
+    width: 560px;
+    height: 315px;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+nav{
+    background-color: beige;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 35px;
+
+}
+.link{
+    height: 35px;
+    margin-top: 6%;
+}

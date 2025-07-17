@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>User Details</title>
+</head>
+<body>
+    <div>
+        <h5>Name:- <%=student.name%></h5>
+        <h5>Mobile No.:- <%=student.mob%></h5>
+        <h5>Email id:- <%=student.email%></h5>
+        <h5>Username:- <%=student.username%></h5>
+        <h5>Student ID:- <%=student.id%></h5>
+    </div>
+    <form action="/admin/alluser/<%=student.id%>?_method=DELETE" method="post">
+        <button type="submit">Delete</button>
+    </form>
+    
+</body>
+</html>

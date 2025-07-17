@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="background.css">
+    <title>All Users</title>
+</head>
+<body>
+    <h5>Admin:- <%=adminUser.username%></h5>
+    <div>
+        <ol>
+            <%for(user of stu){%>
+                <li><a href="/user/details/<%=user.id%>"><%=user.username%></a></li>
+                
+                
+                <%}%>
+        </ol>
+        <a href="/admin/student">Add Students</a>
+    </div>
+    
+</body>
+</html>

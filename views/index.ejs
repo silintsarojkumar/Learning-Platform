@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="background.css">
+    <link rel="stylesheet" href="index.css">
     <title>DSA</title>
 </head>
 <body>
-    <div>
+    <h2>Welcome <%=student.name%></h2>
+    <section>
+        <div>
+        
         <h1>All Content</h1>
         <ol>
             <%for(let tit of allData){%>
@@ -15,8 +19,11 @@
             <%}%>
         </ol>
     </div>
+    
+    </section>
     <footer>
-        <h5>Made With Love by Saroj Kumar</h5>
+        <h5>Made With ❤️ by Saroj Kumar</h5>
+
     </footer>
 </body>
 </html>
