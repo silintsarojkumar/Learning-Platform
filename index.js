@@ -36,7 +36,7 @@ function isLoggedIn(req, res, next) {
 }
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/video');
+  await mongoose.connect('mongodb+srv://silintsarojkumar:<Saroj@2811>@cluster0.tiu0bwb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
   console.log("MongoDB connected");
 }
 
