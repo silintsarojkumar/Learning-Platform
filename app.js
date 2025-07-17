@@ -1,6 +1,10 @@
+
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+
+
+
 const mongoose = require("mongoose");
 const data = require("./modles/data.js"); // Check for typo: "modles" → "models" if needed
 const user = require("./modles/user.js");
@@ -36,7 +40,7 @@ function isLoggedIn(req, res, next) {
 }
 
 async function main() {
-  await mongoose.connect('mongodb+srv://silintsarojkumar:<Saroj@2811>@cluster0.tiu0bwb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+  await mongoose.connect('mongodb+srv://silintsarojkumar:Saroj%402811@cluster0.tiu0bwb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
   console.log("MongoDB connected");
 }
 
@@ -46,7 +50,7 @@ app.listen(port, () => {
 });
 
 // ✅ Home route
-app.get("", async (req, res) => {
+app.get("/", async (req, res) => {
   if (!req.session.isLoggedIn) {
     return res.render("userlogin.ejs");
   }
