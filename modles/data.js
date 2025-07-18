@@ -12,7 +12,17 @@ const videoSchema = new mongoose.Schema(
     },
     Dis: {
       type: String,
-    }
+    },
+    createdAt: {
+    type: Date,
+    default: Date.now,
+     // 🔥 Add index for sorting
+  },
+  index:{
+    type: Number,
+    required: true,
+  }
+    
   
 });
 

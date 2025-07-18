@@ -62,7 +62,7 @@ app.post("/", async(req,res)=>{
   const { username, pass } = req.body;
   const student = await user.findOne({ username, pass });
     if (student) {
-    const allData = await data.find();
+    const allData = await data.find().sort({ index: 1 });
     res.render("index.ejs", { allData ,student});
   } else {
     res.send("Invalid credentials");
@@ -76,7 +76,7 @@ app.get("/admin", async (req, res) => {
     return res.render("loginAdmin.ejs");
   }
 
-  const allData = await data.find();
+  const allData = await data.find().sort({ index: 1 });
   const adminUser = req.session.admin;
   const adm = await admin.find();
   const use = await user.find();
@@ -90,7 +90,7 @@ app.post("/admin", async (req, res) => {
   if (adminUser) {
     req.session.isLoggedIn = true; 
     req.session.admin = adminUser;
-    const allData = await data.find().limit(4);
+    const allData = await data.find().sort({ index: 1 }).limit(4);
     const adm = await admin.find();
     const use = await user.find();
     res.render("admin.ejs", { allData ,adminUser,adm,use});
@@ -99,7 +99,7 @@ app.post("/admin", async (req, res) => {
   }
 });
 app.get("/admin/content",isLoggedIn,async (req,res)=>{
-  const allData = await data.find();
+  const allData = await data.find().sort({ index: 1 });
   const adminUser = req.session.admin;
   res.render("content.ejs", { allData,adminUser });
   
