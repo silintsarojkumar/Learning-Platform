@@ -132,11 +132,11 @@ app.get("/admin/content",isLoggedIn,isAdmin,async (req,res)=>{
   
 })
 
-app.get("/admin/student",isLoggedIn,isAdmin,(req,res)=>{
+app.get("/admin/add-student",isLoggedIn,isAdmin,(req,res)=>{
     const adminUser = req.session.admin;
-    res.render("adminStudent.ejs")
+    res.render("adminAddStudent.ejs",{adminUser})
 })
-app.post("/admin/student",isLoggedIn,isAdmin,async(req,res)=>{
+app.post("/admin/add-student",isLoggedIn,isAdmin,async(req,res)=>{
     
     let nstudent = await new user(req.body);
     nstudent.save();

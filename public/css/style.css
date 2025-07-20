@@ -8,7 +8,11 @@ body{
 }
 .navbar{
     height: 5rem;
+    background-color: white !important;
+}
+.dropdown-menu,.collapse{
     background-color: white;
+
 }
 /* footer */
 .nav-link{
