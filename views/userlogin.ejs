@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="background.css">
-    <title>Student Login</title>
-</head>
-<body>
-    
+<%layout("/layout/boilerplate.ejs")%>
+    <div class="mt-5 row">
+        <div class="col-3 offset-2">
     <form method="post" action="">
-        <input name="username" type="text" placeholder="username">
-        <input name="pass" type="text" placeholder="password">
-         <button type="submit">Login</button>
+        <div>
+            <label for="username" class="form-label">Username</label>
+        <input name="username" class="form-control" type="text" placeholder="Username">
+        </div>
+        <br>
+        <div>
+            <label for="pass" class="form-label">Password</label>
+        <input name="pass" class="form-control" type="password" placeholder="Password">
+        </div>
+        <br>
+         <button type="submit" class="btn btn-dark offset-2">Login</button>
     </form>
+    </div>
+    </div>
     
-</body>
-</html>

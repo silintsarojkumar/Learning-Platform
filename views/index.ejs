@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="background.css">
-    <link rel="stylesheet" href="index.css">
-    <title>DSA</title>
-</head>
-<body>
+<%layout("/layout/boilerplate.ejs")%>
     <h2>Welcome <%=student.name%></h2>
-    <section>
-        <div>
-        
-        <h1>All Content</h1>
-        <ol>
-            <%for(let tit of allData){%>
-            <li><a href="/play/<%=tit.id%>"><%=tit.title%></a></li>
-            <%}%>
-        </ol>
-    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sl-1">
+        <%for(let tit of allData){%>
+            <a href="/play/<%=tit.id%>">
+        <div class="card" style="width: 18rem;">
+  <img src="https://play-lh.googleusercontent.com/di6Z4oj41mSVJAgW755G4Ng25YGgGOoxcWdVnpjzlnzQ1htfy6-6I4gW3QDh_KDZGGLV" class="card-img-top" alt="C++">
+  <div class="card-body">
+    <h5 class="card-title"><%=tit.title%></h5>
     
-    </section>
-    <footer>
-        <h5>Made With ❤️ by Saroj Kumar</h5>
+    
+  </div>
+</div>
+</a>
+<%}%>
+</div>
 
-    </footer>
+
+    
+    
+    
 </body>
 </html>
