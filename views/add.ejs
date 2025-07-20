@@ -9,9 +9,9 @@
   <label for="Dis"class="form-label" >Description</label>
   <textarea name="Dis" placeholder="Description"class="form-control"></textarea>
   <label for="createdAt"class="form-label" >Date & Time</label>
-  <input type="text" value="<%= new Date().toLocaleString() %>" disabled class="form-control"/>
+  <input type="text" value="<%= new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) %>" disabled class="form-control"/>
   <br>
-  <button type="submit" class="btn btn-dark">Add Video</button>
+  <button type="submit" class="btn btn-outline-primary offset-2">Add Video</button>
 </form>
 
     

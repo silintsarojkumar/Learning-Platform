@@ -1,56 +1,45 @@
 <%layout("/layout/adminBoiler.ejs")%>
    <nav> <h4>Admin:- <%=adminUser.name%></h4> </nav>
-<section>
-    <div id="admin">
-        <h5>Admin List</h5>
-         <ol>
-            <%for(let admin of adm){%>
-                    <li><a><%=admin.username%></a></li>
-                    <%}%>
-                    <br>
-         </ol>
-        
-        </div>
-   
-
-    <div>
-        <h3>Students</h3> <a href="/admin/alluser">All Students</a>
-        <ol>
-            <%for(let user of use){%>
-                    <li><a><%=user.username%></a></li>
-                    <br>
-                    <%}%>
-        </ol>
-        
-                    
-        
-        
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sl-1 adminDash">
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Total Active Admins</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary"><%=noAdm%></h6>
+    
+    <a href="/admin/alluser" class="card-link">All Admins</a>
+    <b>||</b>
+    <a href="/admin/add-student" class="card-link">Add Admin</a>
+    </div>
+    
+    </div>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Total Students</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary"><%=nouser%></h6>
+    
+    <a href="/admin/alluser" class="card-link">All Students</a>
+    <b>||</b>
+    <a href="/admin/add-student" class="card-link">Add Student</a>
+    </div>
     </div>
 
-        <div>
-        <table>
-            <caption>All Content</caption>
-            <thead><tr>
-                <th>Title</th>
-                
-            </tr></thead>
-            <tbody>
-                <%for(let tit of allData){%>
-                    <tr>
-                        <th><a href="/admin/detail/<%=tit.id%>"><%=tit.title%></a></th>
-                        
-                        
-                    </tr>
-                    
-                    <%}%>
-                    
-            </tbody>
-        </table>
-
-        <a href="/admin/content">See All</a>
-        
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Total Videos</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary"><%=noData%></h6>
+    
+    <a href="/admin/alluser" class="card-link">All Videos</a>
+    <b>||</b>
+    <a href="/admin/add-student" class="card-link">Add Video</a>
     </div>
-</section>
+    </div>
+
+        
+                    
+        
+        
+
+</div>
 
 
    

@@ -71,8 +71,9 @@ app.get("/", async (req, res) => {
 
   const allData = await data.find().sort({ index: 1 });
   const student = req.session.user; // ✅ get student from session
+  const stu = req.session.user;
 
-  res.render("index.ejs", { allData, student }); // ✅ pass student to EJS
+  res.render("index.ejs", { allData, student ,stu }); // ✅ pass student to EJS
 });
 
 app.post("/", async (req, res) => {
@@ -83,9 +84,10 @@ app.post("/", async (req, res) => {
     req.session.isLoggedIn = true;
     req.session.role = "user";
     req.session.user = student;
+    const stu = req.session.user;
 
     const allData = await data.find().sort({ index: 1 });
-    res.render("index.ejs", { allData, student });
+    res.render("index.ejs", { allData, student,stu });
   } else {
     res.send("Invalid credentials");
   }
@@ -115,11 +117,11 @@ app.post("/admin", async (req, res) => {
     req.session.isLoggedIn = true;
     req.session.admin = adminUser; // ✅ store in session
     req.session.role = "admin"
-    const allData = await data.find().sort({ index: 1 }).limit(4);
-    const adm = await admin.find();
-    const use = await user.find();
+    const noData = await data.countDocuments();
+    const noAdm = await admin.countDocuments();
+    const nouser = await user.countDocuments();
 
-    res.render("admin.ejs", { allData, adminUser, adm, use }); // ✅ pass here too
+    res.render("admin.ejs", { noData, adminUser, noAdm, nouser }); // ✅ pass here too
   } else {
     res.send("Invalid credentials");
   }
@@ -137,13 +139,19 @@ app.get("/admin/add-student",isLoggedIn,isAdmin,(req,res)=>{
     res.render("adminAddStudent.ejs",{adminUser})
 })
 app.post("/admin/add-student",isLoggedIn,isAdmin,async(req,res)=>{
-    
-    let nstudent = await new user(req.body);
-    nstudent.save();
+  try {
+    const nstudent = new user(req.body);
+    await nstudent.save();
     res.redirect("/admin");
-    
-
-
+  } catch (err) {
+    if (err.code === 11000) {
+      const errorMsg = "❌ Username already exists!";
+      const adminUser = req.session.admin;
+      return res.render("adminAddStudent.ejs", { errorMsg, adminUser });
+    } else {
+      res.send("Something went wrong: " + err.message);
+    }
+  }
 })
 
 app.get("/admin/alluser",isLoggedIn,isAdmin,async (req,res)=>{
@@ -151,7 +159,7 @@ app.get("/admin/alluser",isLoggedIn,isAdmin,async (req,res)=>{
     let stu = await user.find();
     res.render("alluser.ejs",{stu,adminUser})
 })
-app.get("/admin/add-vid",(req,res)=>{
+app.get("/admin/add-vid",isLoggedIn,isAdmin,(req,res)=>{
   const adminUser = req.session.admin;
     res.render("add.ejs",{adminUser})
 })
@@ -199,11 +207,72 @@ app.delete("/admin/alluser/:id", isLoggedIn,isAdmin, async (req, res) => {
   await user.findByIdAndDelete(id);
   res.redirect("/admin/alluser");
 });
+app.get("/admin/Profile/:username", isLoggedIn, isAdmin, async (req, res) => {
+  let username = req.params.username;
+  const profile = await admin.findOne({ username });
+
+  if (!profile) {
+    return res.send("Admin not found");
+  }
+
+  const adminUser = req.session.admin;
+  res.render("adminProfile.ejs", { profile, adminUser });
+});
+
+app.put("/admin/Profile/:username", isLoggedIn, isAdmin, async (req, res) => {
+  const oldUsername = req.params.username;
+  const newData = req.body;
+
+  const updatedAdmin = await admin.findOneAndUpdate(
+    { username: oldUsername },
+    newData,
+    { new: true } // return updated document
+  );
+
+  // ✅ update session with new admin data
+  req.session.admin = updatedAdmin;
+
+  // ✅ redirect using updated username (if username changed)
+  res.redirect(`/admin/Profile/${updatedAdmin.username}`);
+});
+
+
+
 app.get("/play/:id",isLoggedIn, isUser,async (req,res)=>{
     let id = req.params.id;
+    const stu = req.session.user;
     let detail = await data.findById(id);
-    res.render("play.ejs",{detail});
+    res.render("play.ejs",{detail, stu});
 })
+
+app.get("/Profile/:username", isLoggedIn, isUser, async (req, res) => {
+  let username = req.params.username;
+  const profile = await user.findOne({ username });
+
+  if (!profile) {
+    return res.send("Student not found");
+  }
+
+  const stu = req.session.user;
+  res.render("studentProfile.ejs", { profile, stu });
+});
+
+app.put("/Profile/:username", isLoggedIn, isUser, async (req, res) => {
+  const oldUsername = req.params.username;
+  const newData = req.body;
+
+  const updatedUser = await user.findOneAndUpdate(
+    { username: oldUsername },
+    newData,
+    { new: true } // return updated document
+  );
+
+  // ✅ update session with new admin data
+  req.session.user = updatedUser;
+
+  // ✅ redirect using updated username (if username changed)
+  res.redirect(`/Profile/${updatedUser.username}`);
+});
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/"); // or to login page

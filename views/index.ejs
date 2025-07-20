@@ -1,4 +1,4 @@
-<%layout("/layout/boilerplate.ejs")%>
+<%layout("/layout/studentLoginBoiler.ejs")%>
     <h2>Welcome <%=student.name%></h2>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sl-1">
         <%for(let tit of allData){%>
@@ -14,9 +14,7 @@
 </a>
 <%}%>
 </div>
-<br>
-<a href="/logout" class="btn btn-dark">Logout</a>
-<br>
+
 
     
     

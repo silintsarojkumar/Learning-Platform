@@ -1,10 +1,12 @@
 <%layout("/layout/adminBoiler.ejs")%>
-<div class="mt-5 row">
-        <div class="col-3 offset-2">
-    <form action="/admin/student" method="POST">
+
+    <form action="/admin/add-student" method="POST">
     <div>
         <label for="username"class="form-label">Username</label>
         <input type="text"class="form-control" name="username" placeholder="Username" required>
+        <% if (typeof errorMsg !== 'undefined') { %>
+  <div class="alert alert-danger"><%= errorMsg %></div>
+<% } %>
     </div>
     <div>
         <label for="name"class="form-label">Name</label>
@@ -27,6 +29,5 @@
 
     <button type="submit" class="btn btn-outline-success offset-2">Register</button>
 </form>
-</div>
-</div>
+
     
