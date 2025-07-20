@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-    <title><%=detail.title%></title>
-</head>
-<body>
-    <div>
-        <h4>Title:- <%= detail.title%></h4>
-        <iframe width="560" height="315" src="<%=detail.link%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <h5>Disciprition:- <%=detail.Dis%></h5>
-    </div>
+<%layout("/layout/boilerplate.ejs")%>
+    <div class="card mb-3">
+  
+          <iframe class="card-img-top" alt="C++" width="560" height="615" src="<%=detail.link%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <div class="card-body">
+    <h5 class="card-title"><%= detail.title%></h5>
+    <p class="card-text"><%=detail.Dis%>.</p>
     
-</body>
-</html>
+  </div>
+  </div>
+
+
+
+ 
+    
