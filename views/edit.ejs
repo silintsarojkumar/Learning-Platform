@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Edit</title>
-</head>
-<body>
+<%layout("/layout/adminBoiler.ejs")%>
     <h5>Admin:- <%=adminUser.username%></h5>
     <h5>Video ID: <%=tdata.id%></h5>
     <form method="post" action="/admin/<%=tdata.id%>?_method=PUT">
@@ -22,5 +14,3 @@
         <button>Submit</button>
     </form>
     
-</body>
-</html>

@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="background.css">
-    <title>Add Content</title>
-</head>
-<body>
+<%layout("/layout/adminBoiler.ejs")%>
     <form method="POST" action="/admin/content">
-  <input type="text" name="title" placeholder="Title" required />
-  <input type="text" name="link" placeholder="Video Link" required />
-  <input type="number" name="index" placeholder="Video Index" required />
-  <textarea name="Dis" placeholder="Description"></textarea>
-  <button type="submit">Add Video</button>
+      <label for="title"class="form-label" >Title</label>
+  <input type="text" name="title" placeholder="Title" required class="form-control"/>
+  <label for="link"class="form-label" >Video Link</label>
+  <input type="text" name="link" placeholder="Video Link" required class="form-control"/>
+  <label for="index"class="form-label" >Video Index</label>
+  <input type="number" name="index" placeholder="Video Index" required class="form-control"/>
+  <label for="Dis"class="form-label" >Description</label>
+  <textarea name="Dis" placeholder="Description"class="form-control"></textarea>
+  <label for="createdAt"class="form-label" >Date & Time</label>
+  <input type="text" value="<%= new Date().toLocaleString() %>" disabled class="form-control"/>
+  <br>
+  <button type="submit" class="btn btn-dark">Add Video</button>
 </form>
 
     
-</body>
-</html>

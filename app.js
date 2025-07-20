@@ -98,29 +98,33 @@ app.get("/admin", async (req, res) => {
     return res.render("loginAdmin.ejs");
   }
 
+  const adminUser = req.session.admin; // ✅ this must exist
   const allData = await data.find().sort({ index: 1 });
-  const adminUser = req.session.admin;
   const adm = await admin.find();
   const use = await user.find();
 
-  res.render("admin.ejs", { allData, adminUser, adm, use });
+  res.render("admin.ejs", { allData, adminUser, adm, use }); // ✅ pass adminUser here
 });
+
 // POST /admin/login - for logging in
 app.post("/admin", async (req, res) => {
   const { username, pass } = req.body;
   const adminUser = await admin.findOne({ username, pass });
+
   if (adminUser) {
-    req.session.isLoggedIn = true; 
-    req.session.role = "admin";
-    req.session.admin = adminUser;
+    req.session.isLoggedIn = true;
+    req.session.admin = adminUser; // ✅ store in session
+    req.session.role = "admin"
     const allData = await data.find().sort({ index: 1 }).limit(4);
     const adm = await admin.find();
     const use = await user.find();
-    res.render("admin.ejs", { allData ,adminUser,adm,use});
+
+    res.render("admin.ejs", { allData, adminUser, adm, use }); // ✅ pass here too
   } else {
     res.send("Invalid credentials");
   }
 });
+
 app.get("/admin/content",isLoggedIn,isAdmin,async (req,res)=>{
   const allData = await data.find().sort({ index: 1 });
   const adminUser = req.session.admin;
@@ -147,8 +151,9 @@ app.get("/admin/alluser",isLoggedIn,isAdmin,async (req,res)=>{
     let stu = await user.find();
     res.render("alluser.ejs",{stu,adminUser})
 })
-app.get("/admin/add",(req,res)=>{
-    res.render("add.ejs")
+app.get("/admin/add-vid",(req,res)=>{
+  const adminUser = req.session.admin;
+    res.render("add.ejs",{adminUser})
 })
 app.post("/admin/content",isLoggedIn,isAdmin,async(req,res)=>{
   let nvideo = await new data(req.body);
@@ -190,6 +195,7 @@ app.get("/user/details/:id", isLoggedIn, isUser, async (req, res) => {
 });
 app.delete("/admin/alluser/:id", isLoggedIn,isAdmin, async (req, res) => {
   let { id } = req.params;
+  
   await user.findByIdAndDelete(id);
   res.redirect("/admin/alluser");
 });
@@ -198,9 +204,14 @@ app.get("/play/:id",isLoggedIn, isUser,async (req,res)=>{
     let detail = await data.findById(id);
     res.render("play.ejs",{detail});
 })
-app.get("/admin/logout",isAdmin, (req, res) => {
+app.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("/admin");
+    res.redirect("/"); // or to login page
+  });
+});
+app.get("/admin/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/admin"); // or to login page
   });
 });
 

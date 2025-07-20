@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="admin.css">
-    
-    <title>admin</title>
-</head>
-<body>
-   <nav> <h4>Admin:- <%=adminUser.name%></h4> <a href="/admin/logout">Logout</a></nav>
+<%layout("/layout/adminBoiler.ejs")%>
+   <nav> <h4>Admin:- <%=adminUser.name%></h4> </nav>
 <section>
     <div id="admin">
         <h5>Admin List</h5>
@@ -64,5 +54,3 @@
 
 
    
-</body>
-</html>

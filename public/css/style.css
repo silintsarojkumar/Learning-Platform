@@ -44,3 +44,9 @@ body{
     justify-content: center;
     align-items: space-evenly;
 }
+.row a{
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+}

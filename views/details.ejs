@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title><%=detail.title%></title>
-</head>
-<body>
+<%layout("/layout/adminBoiler.ejs")%>
     <h5>Admin:- <%=adminUser.username%></h5>
     <div>
         <h4>Title:- <%= detail.title%></h4>
@@ -22,5 +14,3 @@
         <button type="submit">Delete</button>
     </form>
     
-</body>
-</html>

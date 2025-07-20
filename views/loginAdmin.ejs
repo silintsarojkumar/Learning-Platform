@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="background.css">
-    <title>Admin Login</title>
-</head>
-<body>
+<%layout("/layout/boilerplate.ejs")%>
 
-<!-- Login Form -->
-<form action="/admin" method="POST">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="text" name="pass" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
-
-
-
-
-    
-</body>
-</html>
+    <div class="mt-5 row">
+        <div class="col-3 offset-2">
+    <form method="post" action="admin">
+        <div>
+            <label for="username" class="form-label">Username</label>
+        <input name="username" class="form-control" type="text" placeholder="Username">
+        </div>
+        <br>
+        <div>
+            <label for="pass" class="form-label">Password</label>
+        <input name="pass" class="form-control" type="password" placeholder="Password">
+        </div>
+        <br>
+         <button type="submit" class="btn btn-dark offset-2">Login</button>
+    </form>
+    </div>
+    </div>
