@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const data = require("./modles/data.js"); // Check for typo: "modles" → "models" if needed
 const user = require("./modles/user.js");
 const admin = require("./modles/admin.js");
+const idRequest = require("./modles/request.js")
 const path = require("path");
 const methodOverride = require("method-override");
 const { availableMemory } = require("process");
@@ -100,13 +101,29 @@ app.get("/admin", async (req, res) => {
     return res.render("loginAdmin.ejs");
   }
 
-  const adminUser = req.session.admin; // ✅ this must exist
+  const adminUser = req.session.admin;
+
   const allData = await data.find().sort({ index: 1 });
   const adm = await admin.find();
   const use = await user.find();
 
-  res.render("admin.ejs", { allData, adminUser, adm, use }); // ✅ pass adminUser here
+  const noData = await data.countDocuments();
+  const noAdm = await admin.countDocuments();
+  const nouser = await user.countDocuments();
+  let reqNo = await idRequest.countDocuments();
+
+  res.render("admin.ejs", {
+    allData,
+    adminUser,
+    adm,
+    use,
+    noData,
+    noAdm,
+    nouser,
+    reqNo
+  });
 });
+
 
 // POST /admin/login - for logging in
 app.post("/admin", async (req, res) => {
@@ -120,8 +137,9 @@ app.post("/admin", async (req, res) => {
     const noData = await data.countDocuments();
     const noAdm = await admin.countDocuments();
     const nouser = await user.countDocuments();
+    let reqNo = await idRequest.countDocuments();
 
-    res.render("admin.ejs", { noData, adminUser, noAdm, nouser }); // ✅ pass here too
+    res.render("admin.ejs", { noData, adminUser, noAdm, nouser,reqNo }); // ✅ pass here too
   } else {
     res.send("Invalid credentials");
   }
@@ -196,10 +214,11 @@ app.delete("/admin/:id",isLoggedIn,isAdmin, async(req,res)=>{
     res.redirect("/admin")
 
 })
-app.get("/user/details/:id", isLoggedIn, isUser, async (req, res) => {
+app.get("/user/details/:id", isLoggedIn, isAdmin, async (req, res) => {
   let { id } = req.params;
+  const adminUser = req.session.admin;
   let student = await user.findById(id);
-  res.render("userdetails.ejs", { student });
+  res.render("userdetails.ejs", { student , adminUser});
 });
 app.delete("/admin/alluser/:id", isLoggedIn,isAdmin, async (req, res) => {
   let { id } = req.params;
@@ -235,6 +254,50 @@ app.put("/admin/Profile/:username", isLoggedIn, isAdmin, async (req, res) => {
   // ✅ redirect using updated username (if username changed)
   res.redirect(`/admin/Profile/${updatedAdmin.username}`);
 });
+app.get("/admin/user/request",isAdmin,isLoggedIn,async (req,res)=>{
+  let request = await idRequest.find();
+  const adminUser = req.session.admin;
+  res.render("idRequest.ejs",{request,adminUser})
+})
+app.get("/admin/user/request/:id",isAdmin,isLoggedIn,async (req,res)=>{
+  let id=req.params.id;
+  let profile = await idRequest.findById(id);
+ 
+  const adminUser = req.session.admin;
+  res.render("reqDetail.ejs",{profile,adminUser})
+})
+app.post("/admin/user/request/:id",isAdmin,isLoggedIn,async (req,res)=>{
+  
+  let nuser = await new user(req.body)
+  nuser.save();
+  await idRequest.findByIdAndDelete(req.params.id);
+  res.redirect("/admin/user/request")
+})
+app.get("/register",async (req,res)=>{
+
+  
+
+  res.render("registerStu.ejs")
+})
+app.post("/register",async (req,res)=>{
+
+  try {
+    const newReq = await new idRequest(req.body);
+    await newReq.save();
+    res.redirect("/");
+  } catch (err) {
+    if (err.code === 11000) {
+      const errorMsg = "❌ Username already exists!";
+      
+      return res.render("registerStu.ejs", { errorMsg });
+    } else {
+      res.send("Something went wrong: " + err.message);
+    }
+  }
+
+
+  
+})
 
 
 

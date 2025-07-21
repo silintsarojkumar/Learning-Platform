@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/admin">
       <img src="https://play-lh.googleusercontent.com/di6Z4oj41mSVJAgW755G4Ng25YGgGOoxcWdVnpjzlnzQ1htfy6-6I4gW3QDh_KDZGGLV" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      EdeStar
+      EduStar
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -30,13 +30,13 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/admin/alluser">All Students</a></li>
             <li><a class="dropdown-item" href="/admin/add-student">Add Students</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            
           </ul>
         </li>
       </ul>
       
       
-      <a href="/admin/Profile/<%=adminUser.username%>" class="btn btn-outline-success"><%=adminUser.name%></a>
+      <a href="/admin/Profile/<%=adminUser.username%>" class="btn"><i class="fa-regular fa-circle-user"></i></a>
       
       <a href="/admin/logout" class="btn btn-dark">Logout</a>
     </div>

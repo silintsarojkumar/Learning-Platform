@@ -1,0 +1,34 @@
+<%layout("/layout/adminBoiler.ejs")%>
+
+
+<h5>Approve Profile</h5>
+
+    <form action="" method="POST">
+    <div>
+        <label for="username"class="form-label">Username</label>
+        <input type="text"class="form-control" name="username" value="<%=profile.username%>" required>
+        <% if (typeof errorMsg !== 'undefined') { %>
+  <div class="alert alert-danger"><%= errorMsg %></div>
+<% } %>
+    </div>
+    <div>
+        <label for="name"class="form-label">Full Name</label>
+         <input type="text"class="form-control" name="name" value="<%=profile.name%>" required>
+    </div>
+    <div>
+        <label for="mob"class="form-label">Mobile No.</label>
+        <input type="number"class="form-control" name="mob" value="<%=profile.mob%>" required>
+    </div>
+    <div>
+        <label for="email"class="form-label">Email</label>
+        <input type="text"class="form-control" name="email" value="<%=profile.email%>" required>
+    </div>
+    <div>
+        <label for="pass"class="form-label">Password</label>
+        <input type="password"class="form-control" name="pass" value="<%=profile.pass%>" required>
+    </div>
+    
+    <br>
+
+    <button type="submit" class="btn btn-outline-success offset-2">Approve</button>
+</form>

@@ -8,11 +8,11 @@
             </tr></thead>
             <tbody>
         
-            <%for(user of stu){%>
+            <%for(user of request){%>
                 
                  <tr>
-                        <th><a href="/user/details/<%=user.id%>"><%=user.username%></a></th>
-                        <th><a href="/user/details/<%=user.id%>"><%=user.mob%></a></th>
+                        <th><a href="/admin/user/request/<%=user.id%>"><%=user.username%></a></th>
+                        <th><a href="/admin/user/request/<%=user.id%>"><%=user.mob%></a></th>
                         
                     </tr>
                 
@@ -23,4 +23,3 @@
         </table>
         
     </div>
-    

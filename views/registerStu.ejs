@@ -1,0 +1,33 @@
+<%layout("/layout/boilerplate.ejs")%>
+
+    <form action="/register" method="POST">
+    <div>
+        <label for="username"class="form-label">Username</label>
+        <input type="text"class="form-control" name="username" placeholder="Username" required>
+        <% if (typeof errorMsg !== 'undefined') { %>
+  <div class="alert alert-danger"><%= errorMsg %></div>
+<% } %>
+    </div>
+    <div>
+        <label for="name"class="form-label">Name</label>
+         <input type="text"class="form-control" name="name" placeholder="Full Name" required>
+    </div>
+    <div>
+        <label for="mob"class="form-label">Mobile No.</label>
+        <input type="number"class="form-control" name="mob" placeholder="Mobile" required>
+    </div>
+    <div>
+        <label for="email"class="form-label">Email</label>
+        <input type="text"class="form-control" name="email" placeholder="Email" required>
+    </div>
+    <div>
+        <label for="pass"class="form-label">Password</label>
+        <input type="text"class="form-control" name="pass" placeholder="Password" required>
+    </div>
+    
+    <br>
+
+    <button type="submit" class="btn btn-outline-success offset-2">Register</button>
+</form>
+
+    
