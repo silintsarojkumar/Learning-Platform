@@ -9,6 +9,7 @@ body{
 .navbar{
     height: 5rem;
     background-color: white !important;
+    z-index: 1;
 }
 .dropdown-menu,.collapse{
     background-color: white;
@@ -53,6 +54,7 @@ body{
 }
 a {
     text-decoration: none;
+    color: black;
 }
 .adminDash{
     display: flex !important;

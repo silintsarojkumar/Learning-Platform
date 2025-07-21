@@ -27,6 +27,7 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname,"public")))
+
 app.use(express.urlencoded({ extended: true }));
 
 // ✅ Connect to MongoDB
@@ -228,6 +229,11 @@ app.delete("/admin/alluser/:id", isLoggedIn,isAdmin, async (req, res) => {
 });
 app.get("/admin/Profile/:username", isLoggedIn, isAdmin, async (req, res) => {
   let username = req.params.username;
+    const sessionUser = req.session.admin;
+  if (sessionUser.username !== username) {
+    return res.status(403).send("Unauthorized access ❌");
+  }
+
   const profile = await admin.findOne({ username });
 
   if (!profile) {
@@ -310,6 +316,10 @@ app.get("/play/:id",isLoggedIn, isUser,async (req,res)=>{
 
 app.get("/Profile/:username", isLoggedIn, isUser, async (req, res) => {
   let username = req.params.username;
+  const sessionUser = req.session.user;
+  if (sessionUser.username !== username) {
+    return res.status(403).send("Unauthorized access ❌");
+  }
   const profile = await user.findOne({ username });
 
   if (!profile) {
@@ -319,6 +329,7 @@ app.get("/Profile/:username", isLoggedIn, isUser, async (req, res) => {
   const stu = req.session.user;
   res.render("studentProfile.ejs", { profile, stu });
 });
+
 
 app.put("/Profile/:username", isLoggedIn, isUser, async (req, res) => {
   const oldUsername = req.params.username;
